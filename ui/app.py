@@ -434,7 +434,27 @@ st.markdown('<div class="content-wrapper">', unsafe_allow_html=True)
 
 # ---------------- HEADER ----------------
 st.markdown("# ✈️ Agentic AI Travel Planner")
-st.markdown('<p class="subtitle">Plan your dream trip with AI-powered recommendations for flights, hotels, places & weather</p>', unsafe_allow_html=True)
+st.markdown('''
+<div style="
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 1rem 2rem;
+    border-radius: 15px;
+    margin: 0 auto 2rem auto;
+    max-width: 900px;
+    box-shadow: 0 10px 40px rgba(102, 126, 234, 0.4);
+">
+    <p style="
+        text-align: center;
+        color: #ffffff;
+        font-size: 1.4rem;
+        margin: 0;
+        font-weight: 500;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    ">
+        Plan your dream trip with AI-powered recommendations for flights, hotels, places & weather
+    </p>
+</div>
+''', unsafe_allow_html=True)
 
 # ---------------- INPUT SECTION ----------------
 st.markdown('<div class="glass-card">', unsafe_allow_html=True)
