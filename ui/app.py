@@ -417,12 +417,18 @@ st.markdown("""
 
 # ---------------- HERO IMAGE ----------------
 try:
-    hero_img = Image.open("ui/hero_banner.png")
+    # Get the directory where this script is located
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    # Build path to hero_banner.png in the same directory
+    hero_image_path = os.path.join(script_dir, "hero_banner.png")
+    
+    hero_img = Image.open(hero_image_path)
     st.markdown('<div class="hero-banner">', unsafe_allow_html=True)
     st.image(hero_img, use_container_width=True)
     st.markdown('</div>', unsafe_allow_html=True)
-except:
-    pass  # Skip if image not found
+except Exception as e:
+    # Silently skip if image not found - don't break the app
+    pass
 
 st.markdown('<div class="content-wrapper">', unsafe_allow_html=True)
 
