@@ -416,7 +416,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ---------------- HERO BANNER (CSS-ONLY - GUARANTEED TO WORK!) ----------------
-st.markdown("""
+hero_html = """
 <div style="
     background: linear-gradient(135deg, 
         #667eea 0%, 
@@ -581,7 +581,11 @@ st.markdown("""
         }
     }
 </style>
-""", unsafe_allow_html=True)
+"""
+
+# Use components.html for guaranteed rendering
+import streamlit.components.v1 as components
+components.html(hero_html, height=600)
 
 
 st.markdown('<div class="content-wrapper">', unsafe_allow_html=True)
