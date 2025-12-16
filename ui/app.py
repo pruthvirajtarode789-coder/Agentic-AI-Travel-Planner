@@ -415,83 +415,175 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# ---------------- HERO IMAGE ----------------
-hero_image_loaded = False
-
-# Try loading hero banner image with multiple path strategies
-try:
-    # Strategy 1: Try relative path from current script location
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    path1 = os.path.join(script_dir, "hero_banner.png")
-    
-    # Strategy 2: Try from project root
-    project_root = os.path.dirname(script_dir)
-    path2 = os.path.join(project_root, "ui", "hero_banner.png")
-    
-    # Strategy 3: Try from current working directory
-    path3 = os.path.join(os.getcwd(), "ui", "hero_banner.png")
-    
-    # Strategy 4: Try direct relative path (Streamlit native)
-    path4 = "ui/hero_banner.png"
-    
-    # Debug: Print paths being tried (visible in Render logs)
-    print(f"🔍 DEBUG: Script dir: {script_dir}")
-    print(f"🔍 DEBUG: CWD: {os.getcwd()}")
-    print(f"🔍 DEBUG: Trying paths:")
-    print(f"  Path 1: {path1} - Exists: {os.path.exists(path1)}")
-    print(f"  Path 2: {path2} - Exists: {os.path.exists(path2)}")
-    print(f"  Path 3: {path3} - Exists: {os.path.exists(path3)}")
-    print(f"  Path 4: {path4} - Exists: {os.path.exists(path4)}")
-    
-    # Try each path in order
-    for path_to_try in [path1, path2, path3, path4]:
-        if os.path.exists(path_to_try):
-            print(f"✅ SUCCESS: Found image at {path_to_try}")
-            hero_img = Image.open(path_to_try)
-            st.markdown('<div class="hero-banner">', unsafe_allow_html=True)
-            st.image(hero_img, use_container_width=True)
-            st.markdown('</div>', unsafe_allow_html=True)
-            hero_image_loaded = True
-            break
-    
-    # If no path worked with PIL, try Streamlit's native image loading
-    if not hero_image_loaded:
-        print("⚠️ WARNING: Trying Streamlit native image loading...")
-        try:
-            st.markdown('<div class="hero-banner">', unsafe_allow_html=True)
-            st.image("ui/hero_banner.png", use_container_width=True)
-            st.markdown('</div>', unsafe_allow_html=True)
-            hero_image_loaded = True
-            print("✅ SUCCESS: Streamlit native loading worked!")
-        except:
-            print("❌ FAILED: Streamlit native loading also failed")
-            pass
-
-except Exception as e:
-    print(f"❌ ERROR loading hero banner: {type(e).__name__}: {e}")
-    import traceback
-    traceback.print_exc()
-
-# Show fallback banner if image didn't load
-if not hero_image_loaded:
-    print("📋 INFO: Showing fallback gradient banner")
-    st.markdown('''
+# ---------------- HERO BANNER (CSS-ONLY - GUARANTEED TO WORK!) ----------------
+st.markdown('''
+<div style="
+    background: linear-gradient(135deg, 
+        #667eea 0%, 
+        #764ba2 25%, 
+        #f093fb 50%, 
+        #4facfe 75%, 
+        #00f2fe 100%);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+    padding: 4rem 2rem;
+    border-radius: 25px;
+    text-align: center;
+    margin-bottom: 2rem;
+    box-shadow: 0 25px 70px rgba(102, 126, 234, 0.5);
+    position: relative;
+    overflow: hidden;
+">
+    <!-- Floating Emojis Background -->
     <div style="
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        padding: 3rem 2rem;
-        border-radius: 20px;
-        text-align: center;
-        margin-bottom: 2rem;
-        box-shadow: 0 20px 60px rgba(102, 126, 234, 0.4);
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        opacity: 0.15;
+        font-size: 4rem;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-wrap: wrap;
+        pointer-events: none;
     ">
-        <h1 style="color: white; font-size: 3rem; margin: 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">
-            ✈️ Agentic AI Travel Planner 🌍
-        </h1>
-        <p style="color: rgba(255,255,255,0.9); font-size: 1.3rem; margin-top: 1rem;">
-            Your AI-Powered Trip Planning Assistant
-        </p>
+        <span style="animation: float 6s ease-in-out infinite;">✈️</span>
+        <span style="animation: float 8s ease-in-out infinite;">🌍</span>
+        <span style="animation: float 7s ease-in-out infinite;">🏖️</span>
+        <span style="animation: float 9s ease-in-out infinite;">🗺️</span>
+        <span style="animation: float 5s ease-in-out infinite;">🧳</span>
+        <span style="animation: float 10s ease-in-out infinite;">🏨</span>
+        <span style="animation: float 6.5s ease-in-out infinite;">🎫</span>
+        <span style="animation: float 8.5s ease-in-out infinite;">📸</span>
     </div>
-    ''', unsafe_allow_html=True)
+    
+    <!-- Main Content -->
+    <div style="position: relative; z-index: 1;">
+        <div style="
+            font-size: 1rem;
+            color: rgba(255,255,255,0.9);
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            animation: fadeInDown 1s ease;
+        ">
+            ✨ Welcome to ✨
+        </div>
+        
+        <h1 style="
+            color: white;
+            font-size: 4rem;
+            font-weight: 900;
+            margin: 1rem 0;
+            text-shadow: 
+                2px 2px 8px rgba(0,0,0,0.3),
+                0 0 40px rgba(255,255,255,0.2);
+            animation: fadeInScale 1.2s ease;
+            line-height: 1.2;
+        ">
+            <span style="display: inline-block; animation: bounce 2s ease infinite;">✈️</span>
+            Agentic AI Travel Planner
+            <span style="display: inline-block; animation: bounce 2s ease 0.5s infinite;">🌍</span>
+        </h1>
+        
+        <p style="
+            color: rgba(255,255,255,0.95);
+            font-size: 1.4rem;
+            font-weight: 500;
+            margin-top: 1.5rem;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+            animation: fadeInUp 1.4s ease;
+        ">
+            🤖 Your AI-Powered Trip Planning Assistant
+        </p>
+        
+        <div style="
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+            animation: fadeInUp 1.6s ease;
+        ">
+            <div style="
+                background: rgba(255,255,255,0.2);
+                backdrop-filter: blur(10px);
+                padding: 1rem 2rem;
+                border-radius: 50px;
+                border: 2px solid rgba(255,255,255,0.3);
+                font-weight: 600;
+                color: white;
+            ">
+                🌍 Any Destination Worldwide
+            </div>
+            <div style="
+                background: rgba(255,255,255,0.2);
+                backdrop-filter: blur(10px);
+                padding: 1rem 2rem;
+                border-radius: 50px;
+                border: 2px solid rgba(255,255,255,0.3);
+                font-weight: 600;
+                color: white;
+            ">
+                🎯 AI-Powered Recommendations
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    @keyframes gradientShift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+    
+    @keyframes fadeInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    @keyframes fadeInScale {
+        from {
+            opacity: 0;
+            transform: scale(0.9);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+    
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    @keyframes bounce {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-10px);
+        }
+    }
+</style>
+''', unsafe_allow_html=True)
 
 
 st.markdown('<div class="content-wrapper">', unsafe_allow_html=True)
