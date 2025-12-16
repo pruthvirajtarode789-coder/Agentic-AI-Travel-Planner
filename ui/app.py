@@ -417,18 +417,67 @@ st.markdown("""
 
 # ---------------- HERO IMAGE ----------------
 try:
-    # Get the directory where this script is located
+    # Try multiple paths for the hero banner image
+    # Path 1: Same directory as this script (for development)
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    # Build path to hero_banner.png in the same directory
     hero_image_path = os.path.join(script_dir, "hero_banner.png")
     
-    hero_img = Image.open(hero_image_path)
-    st.markdown('<div class="hero-banner">', unsafe_allow_html=True)
-    st.image(hero_img, use_container_width=True)
-    st.markdown('</div>', unsafe_allow_html=True)
+    # Path 2: If not found, try relative to project root (for deployment)
+    if not os.path.exists(hero_image_path):
+        # Get project root (parent of ui directory)
+        project_root = os.path.dirname(script_dir)
+        hero_image_path = os.path.join(project_root, "ui", "hero_banner.png")
+    
+    # Path 3: Try current working directory
+    if not os.path.exists(hero_image_path):
+        hero_image_path = os.path.join(os.getcwd(), "ui", "hero_banner.png")
+    
+    # Check if image exists before trying to open
+    if os.path.exists(hero_image_path):
+        hero_img = Image.open(hero_image_path)
+        st.markdown('<div class="hero-banner">', unsafe_allow_html=True)
+        st.image(hero_img, use_container_width=True)
+        st.markdown('</div>', unsafe_allow_html=True)
+    else:
+        # Show a styled text banner if image not found
+        st.markdown('''
+        <div style="
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.4);
+        ">
+            <h1 style="color: white; font-size: 3rem; margin: 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">
+                ✈️ Agentic AI Travel Planner 🌍
+            </h1>
+            <p style="color: rgba(255,255,255,0.9); font-size: 1.3rem; margin-top: 1rem;">
+                Your AI-Powered Trip Planning Assistant
+            </p>
+        </div>
+        ''', unsafe_allow_html=True)
 except Exception as e:
-    # Silently skip if image not found - don't break the app
-    pass
+    # If any error, show a styled fallback banner
+    print(f"Hero banner error: {e}")
+    st.markdown('''
+    <div style="
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 3rem 2rem;
+        border-radius: 20px;
+        text-align: center;
+        margin-bottom: 2rem;
+        box-shadow: 0 20px 60px rgba(102, 126, 234, 0.4);
+    ">
+        <h1 style="color: white; font-size: 3rem; margin: 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">
+            ✈️ Agentic AI Travel Planner 🌍
+        </h1>
+        <p style="color: rgba(255,255,255,0.9); font-size: 1.3rem; margin-top: 1rem;">
+            Your AI-Powered Trip Planning Assistant
+        </p>
+    </div>
+    ''', unsafe_allow_html=True)
+
 
 st.markdown('<div class="content-wrapper">', unsafe_allow_html=True)
 
