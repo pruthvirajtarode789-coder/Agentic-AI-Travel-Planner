@@ -416,7 +416,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ---------------- HERO BANNER (CSS-ONLY - GUARANTEED TO WORK!) ----------------
-st.markdown('''
+st.markdown("""
 <div style="
     background: linear-gradient(135deg, 
         #667eea 0%, 
@@ -434,7 +434,6 @@ st.markdown('''
     position: relative;
     overflow: hidden;
 ">
-    <!-- Floating Emojis Background -->
     <div style="
         position: absolute;
         top: 0;
@@ -459,7 +458,6 @@ st.markdown('''
         <span style="animation: float 8.5s ease-in-out infinite;">📸</span>
     </div>
     
-    <!-- Main Content -->
     <div style="position: relative; z-index: 1;">
         <div style="
             font-size: 1rem;
@@ -583,7 +581,7 @@ st.markdown('''
         }
     }
 </style>
-''', unsafe_allow_html=True)
+""", unsafe_allow_html=True)
 
 
 st.markdown('<div class="content-wrapper">', unsafe_allow_html=True)
