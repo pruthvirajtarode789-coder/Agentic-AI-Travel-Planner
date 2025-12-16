@@ -496,5 +496,68 @@
             "parking",
             "pool"
         ]
+    },
+    {
+        "hotel_id": "HOT0041",
+        "name": "The Westin Pune",
+        "city": "Pune",
+        "stars": 5,
+        "price_per_night": 4500,
+        "amenities": [
+            "wifi",
+            "pool",
+            "gym",
+            "spa",
+            "breakfast"
+        ]
+    },
+    {
+        "hotel_id": "HOT0042",
+        "name": "Hotel Sagar Plaza",
+        "city": "Pune",
+        "stars": 4,
+        "price_per_night": 3200,
+        "amenities": [
+            "wifi",
+            "parking",
+            "breakfast"
+        ]
+    },
+    {
+        "hotel_id": "HOT0043",
+        "name": "Conrad Pune",
+        "city": "Pune",
+        "stars": 5,
+        "price_per_night": 5200,
+        "amenities": [
+            "wifi",
+            "pool",
+            "gym",
+            "spa",
+            "parking",
+            "breakfast"
+        ]
+    },
+    {
+        "hotel_id": "HOT0044",
+        "name": "Hotel Panchshil",
+        "city": "Pune",
+        "stars": 3,
+        "price_per_night": 2400,
+        "amenities": [
+            "wifi",
+            "parking"
+        ]
+    },
+    {
+        "hotel_id": "HOT0045",
+        "name": "Budget Inn Pune",
+        "city": "Pune",
+        "stars": 2,
+        "price_per_night": 1800,
+        "amenities": [
+            "wifi",
+            "parking"
+        ]
     }
 ]

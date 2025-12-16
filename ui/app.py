@@ -533,32 +533,37 @@ if st.button("🚀 Generate My Dream Trip", use_container_width=True):
                     st.markdown('<div class="hotel-card">', unsafe_allow_html=True)
                     
                     hotel = plan["hotel"]
-                    hotel_search_query = f"{hotel['name']} {hotel['city']}"
-                    hotel_maps_link = f"https://www.google.com/maps/search/?api=1&query={hotel_search_query.replace(' ', '+')}"
                     
-                    st.markdown(f'<div class="hotel-name">{hotel["name"]}</div>', unsafe_allow_html=True)
-                    st.markdown(f"⭐ **{hotel['stars']} Star Hotel** in {hotel['city']}")
-                    st.markdown(f'<div class="hotel-price">₹{hotel["price_per_night"]:,} / night</div>', unsafe_allow_html=True)
-                    st.markdown(f"**Amenities:** {', '.join(hotel['amenities'])}")
-                    st.markdown(f"**Total Stay Cost:** ₹{hotel['price_per_night'] * days:,}")
-                    
-                    # Add clickable buttons
-                    st.markdown(f'''
-                    <a href="{hotel_maps_link}" target="_blank" style="
-                        display: inline-block;
-                        background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
-                        color: #2d3748;
-                        padding: 0.8rem 2rem;
-                        border-radius: 25px;
-                        text-decoration: none;
-                        font-weight: 700;
-                        margin-top: 1rem;
-                        transition: all 0.3s ease;
-                        box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
-                    ">
-                        📍 View on Google Maps
-                    </a>
-                    ''', unsafe_allow_html=True)
+                    # Check if hotel has a message (no hotels found) or actual hotel data
+                    if "message" in hotel:
+                        st.warning(f"⚠️ {hotel['message']}")
+                    else:
+                        hotel_search_query = f"{hotel['name']} {hotel['city']}"
+                        hotel_maps_link = f"https://www.google.com/maps/search/?api=1&query={hotel_search_query.replace(' ', '+')}"
+                        
+                        st.markdown(f'<div class="hotel-name">{hotel["name"]}</div>', unsafe_allow_html=True)
+                        st.markdown(f"⭐ **{hotel['stars']} Star Hotel** in {hotel['city']}")
+                        st.markdown(f'<div class="hotel-price">₹{hotel["price_per_night"]:,} / night</div>', unsafe_allow_html=True)
+                        st.markdown(f"**Amenities:** {', '.join(hotel['amenities'])}")
+                        st.markdown(f"**Total Stay Cost:** ₹{hotel['price_per_night'] * days:,}")
+                        
+                        # Add clickable buttons
+                        st.markdown(f'''
+                        <a href="{hotel_maps_link}" target="_blank" style="
+                            display: inline-block;
+                            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+                            color: #2d3748;
+                            padding: 0.8rem 2rem;
+                            border-radius: 25px;
+                            text-decoration: none;
+                            font-weight: 700;
+                            margin-top: 1rem;
+                            transition: all 0.3s ease;
+                            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+                        ">
+                            📍 View on Google Maps
+                        </a>
+                        ''', unsafe_allow_html=True)
                     
                     st.markdown('</div>', unsafe_allow_html=True)
                     

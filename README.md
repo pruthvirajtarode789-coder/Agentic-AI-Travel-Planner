@@ -83,11 +83,17 @@ Companies like **MakeMyTrip**, **Booking.com**, **ClearTrip**, and **Ixigo** are
 
 ## ✨ Features
 
+### 🌍 **NEW! Global Destination Support**
+> **Plan trips to ANY location worldwide!**  
+> The app now uses **AI-powered dynamic data generation** when cities are not in the database. Whether you're traveling from Nanded to Pune, Delhi to Dubai, or Mumbai to New York - the app automatically generates realistic flight, hotel, and attraction data for you!  
+> 📖 **[Learn more about Global Support →](GLOBAL_SUPPORT.md)**
+
 ### 🤖 AI-Powered Features
 - **Intelligent Trip Planning** - Claude AI analyzes preferences and creates optimal itineraries
 - **Multi-Tool Reasoning** - Agent autonomously decides which tools to use
 - **Personalized Recommendations** - Hotels, flights, and attractions tailored to your needs
 - **AI Insights** - Explains reasoning behind each recommendation
+- **Dynamic Data Generation** - Works for ANY city, even if not in database
 
 ### 🗺️ Interactive Features
 - **Live Weather Integration** - Real-time forecasts using Open-Meteo API

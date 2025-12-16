@@ -278,5 +278,61 @@
         "city": "Jaipur",
         "type": "park",
         "rating": 4.6
+    },
+    {
+        "place_id": "PLC0041",
+        "name": "Shaniwar Wada",
+        "city": "Pune",
+        "type": "fort",
+        "rating": 4.5
+    },
+    {
+        "place_id": "PLC0042",
+        "name": "Aga Khan Palace",
+        "city": "Pune",
+        "type": "museum",
+        "rating": 4.6
+    },
+    {
+        "place_id": "PLC0043",
+        "name": "Sinhagad Fort",
+        "city": "Pune",
+        "type": "fort",
+        "rating": 4.4
+    },
+    {
+        "place_id": "PLC0044",
+        "name": "Osho Ashram",
+        "city": "Pune",
+        "type": "temple",
+        "rating": 4.3
+    },
+    {
+        "place_id": "PLC0045",
+        "name": "Dagdusheth Halwai Temple",
+        "city": "Pune",
+        "type": "temple",
+        "rating": 4.7
+    },
+    {
+        "place_id": "PLC0046",
+        "name": "Pune Okayama Friendship Garden",
+        "city": "Pune",
+        "type": "park",
+        "rating": 4.2
+    },
+    {
+        "place_id": "PLC0047",
+        "name": "Pataleshwar Cave Temple",
+        "city": "Pune",
+        "type": "temple",
+        "rating": 4.3
+    },
+    {
+        "place_id": "PLC0048",
+        "name": "Lal Mahal",
+        "city": "Pune",
+        "type": "museum",
+        "rating": 4.1
     }
 ]
