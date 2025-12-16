@@ -416,50 +416,65 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ---------------- HERO IMAGE ----------------
+hero_image_loaded = False
+
+# Try loading hero banner image with multiple path strategies
 try:
-    # Try multiple paths for the hero banner image
-    # Path 1: Same directory as this script (for development)
+    # Strategy 1: Try relative path from current script location
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    hero_image_path = os.path.join(script_dir, "hero_banner.png")
+    path1 = os.path.join(script_dir, "hero_banner.png")
     
-    # Path 2: If not found, try relative to project root (for deployment)
-    if not os.path.exists(hero_image_path):
-        # Get project root (parent of ui directory)
-        project_root = os.path.dirname(script_dir)
-        hero_image_path = os.path.join(project_root, "ui", "hero_banner.png")
+    # Strategy 2: Try from project root
+    project_root = os.path.dirname(script_dir)
+    path2 = os.path.join(project_root, "ui", "hero_banner.png")
     
-    # Path 3: Try current working directory
-    if not os.path.exists(hero_image_path):
-        hero_image_path = os.path.join(os.getcwd(), "ui", "hero_banner.png")
+    # Strategy 3: Try from current working directory
+    path3 = os.path.join(os.getcwd(), "ui", "hero_banner.png")
     
-    # Check if image exists before trying to open
-    if os.path.exists(hero_image_path):
-        hero_img = Image.open(hero_image_path)
-        st.markdown('<div class="hero-banner">', unsafe_allow_html=True)
-        st.image(hero_img, use_container_width=True)
-        st.markdown('</div>', unsafe_allow_html=True)
-    else:
-        # Show a styled text banner if image not found
-        st.markdown('''
-        <div style="
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 3rem 2rem;
-            border-radius: 20px;
-            text-align: center;
-            margin-bottom: 2rem;
-            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.4);
-        ">
-            <h1 style="color: white; font-size: 3rem; margin: 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">
-                ✈️ Agentic AI Travel Planner 🌍
-            </h1>
-            <p style="color: rgba(255,255,255,0.9); font-size: 1.3rem; margin-top: 1rem;">
-                Your AI-Powered Trip Planning Assistant
-            </p>
-        </div>
-        ''', unsafe_allow_html=True)
+    # Strategy 4: Try direct relative path (Streamlit native)
+    path4 = "ui/hero_banner.png"
+    
+    # Debug: Print paths being tried (visible in Render logs)
+    print(f"🔍 DEBUG: Script dir: {script_dir}")
+    print(f"🔍 DEBUG: CWD: {os.getcwd()}")
+    print(f"🔍 DEBUG: Trying paths:")
+    print(f"  Path 1: {path1} - Exists: {os.path.exists(path1)}")
+    print(f"  Path 2: {path2} - Exists: {os.path.exists(path2)}")
+    print(f"  Path 3: {path3} - Exists: {os.path.exists(path3)}")
+    print(f"  Path 4: {path4} - Exists: {os.path.exists(path4)}")
+    
+    # Try each path in order
+    for path_to_try in [path1, path2, path3, path4]:
+        if os.path.exists(path_to_try):
+            print(f"✅ SUCCESS: Found image at {path_to_try}")
+            hero_img = Image.open(path_to_try)
+            st.markdown('<div class="hero-banner">', unsafe_allow_html=True)
+            st.image(hero_img, use_container_width=True)
+            st.markdown('</div>', unsafe_allow_html=True)
+            hero_image_loaded = True
+            break
+    
+    # If no path worked with PIL, try Streamlit's native image loading
+    if not hero_image_loaded:
+        print("⚠️ WARNING: Trying Streamlit native image loading...")
+        try:
+            st.markdown('<div class="hero-banner">', unsafe_allow_html=True)
+            st.image("ui/hero_banner.png", use_container_width=True)
+            st.markdown('</div>', unsafe_allow_html=True)
+            hero_image_loaded = True
+            print("✅ SUCCESS: Streamlit native loading worked!")
+        except:
+            print("❌ FAILED: Streamlit native loading also failed")
+            pass
+
 except Exception as e:
-    # If any error, show a styled fallback banner
-    print(f"Hero banner error: {e}")
+    print(f"❌ ERROR loading hero banner: {type(e).__name__}: {e}")
+    import traceback
+    traceback.print_exc()
+
+# Show fallback banner if image didn't load
+if not hero_image_loaded:
+    print("📋 INFO: Showing fallback gradient banner")
     st.markdown('''
     <div style="
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
